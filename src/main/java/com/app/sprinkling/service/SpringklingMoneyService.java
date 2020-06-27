@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +21,9 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class SpringklingMoneyService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final SpringklingMoneyRepository springklingMoneyRepository;
 
@@ -84,11 +90,15 @@ public class SpringklingMoneyService {
         }
 
         // 뿌리기 내역 조회
-        SpringklingMoney springklingMoney =
+        SpringklingMoney findSpringklingMoney =
                 springklingMoneyRepositorySupport.findOneToReceive(springklingParam);
 
-        // token 과 roomId 로 일치하는 내역이 없는 경우
-        if (springklingMoney == null) {
+        SpringklingMoney springklingMoney;
+        if (findSpringklingMoney != null) {
+            // DB lock 설정
+            springklingMoney = entityManager.find(SpringklingMoney.class, findSpringklingMoney.getSpringklingMoneyId(), LockModeType.PESSIMISTIC_WRITE);
+        } else {
+            // token 과 roomId 로 일치하는 내역이 없는 경우
             throw new SpringklingMoneyApiException("유효하지 않은 요청입니다.");
         }
 
