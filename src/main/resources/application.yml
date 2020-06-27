@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:~/memdb/sprk_money_db;MODE=MYSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 20
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false # true / false
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate.format_sql: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+
+logging:
+  level:
+    web: debug

@@ -1,0 +1,4 @@
+insert into SPRK_MONEY_M (ROOM_ID, USER_ID, TOKEN, STATUS, TOTAL_AMT, USER_CNT, CREATED_AT) values('ROOM1000', 1000, 'GOD', 'pending', 50000, 3, '2020-06-20 12:13:04');
+insert into SPRK_MONEY_D (ROOM_ID, USER_ID, TOKEN, STATUS, AMOUNT) values ('ROOM1000', 1000, 'GOD', 'pending', 10000);
+insert into SPRK_MONEY_D (ROOM_ID, USER_ID, TOKEN, STATUS, AMOUNT) values ('ROOM1000', 1000, 'GOD', 'pending', 20000);
+insert into SPRK_MONEY_D (ROOM_ID, USER_ID, TOKEN, STATUS, AMOUNT) values ('ROOM1000', 1000, 'GOD', 'pending', 20000);
