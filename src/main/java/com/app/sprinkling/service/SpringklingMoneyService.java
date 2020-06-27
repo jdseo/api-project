@@ -79,20 +79,6 @@ public class SpringklingMoneyService {
 
     @Transactional
     public long receive(SpringklingParam springklingParam) {
-        /**
-         * 다음 조건을 만족하는 받기 API를 만들어 주세요.
-         * ○ 뿌리기 시 발급된 token을 요청값으로 받습니다.
-         *
-         * ○ token에 해당하는 뿌리기 건 중 아직 누구에게도 할당되지 않은 분배건 하나를
-         * API를 호출한 사용자에게 할당하고, 그 금액을 응답값으로 내려줍니다.
-         *
-         * ○ 뿌리기 당 한사용자는 한번만받을수있습니다.
-         * ○ 자신이 뿌리기한 건은 자신이 받을 수 없습니다.
-         * ○ 뿌린기가 호출된 대화방과 동일한 대화방에 속한 사용자만이 받을 수
-         * 있습니다.
-         * ○ 뿌린 건은 10분간만 유효합니다. 뿌린지 10분이 지난 요청에 대해서는 받기
-         * 실패 응답이 내려가야 합니다.
-         */
         if (springklingParam.getToken() == null) {
             throw new InvalidParameterException("token 은 필수 입력입니다.");
         }
